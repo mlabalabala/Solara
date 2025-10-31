@@ -744,7 +744,7 @@ body.background-transitioning .background-stage__layer--transition {
 .playlist {
     grid-area: playlist;
     background: var(--component-bg);
-    border-radius: 16px;
+    border-radius: 5px;
     padding: 72px 20px 24px;
     border: 1px solid var(--border-color);
     display: flex;
