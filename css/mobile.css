@@ -17,7 +17,7 @@ body.mobile-view {
     display: flex;
     justify-content: center;
     align-items: stretch;
-    padding: calc(env(safe-area-inset-top) + 12px) clamp(12px, 5vw, 24px) calc(env(safe-area-inset-bottom) + 20px);
+    /*padding: calc(env(safe-area-inset-top) + 12px) clamp(12px, 5vw, 24px) calc(env(safe-area-inset-bottom) + 20px);*/
     font-family: var(--font-main);
     background-attachment: fixed;
     box-sizing: border-box;
@@ -78,7 +78,7 @@ body.mobile-view .container {
     width: 100%;
     max-width: 420px;
     background: linear-gradient(180deg, rgba(27, 29, 36, 0.92), rgba(7, 9, 14, 0.95));
-    border-radius: 32px;
+    border-radius: 10px;
     padding: clamp(16px, 5vw, 28px);
     padding-top: calc(env(safe-area-inset-top) + clamp(18px, 6vw, 32px));
     padding-bottom: calc(env(safe-area-inset-bottom) + clamp(22px, 7vw, 32px));
@@ -211,7 +211,7 @@ body.mobile-view .album-cover {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 58%;
+    /*width: 58%;*/
     aspect-ratio: 1 / 1;
     transform: translate(-50%, -50%);
     border-radius: 50%;
