@@ -135,8 +135,8 @@ body.background-transitioning .background-stage__layer--transition {
     width: 100%;
     margin: 0 auto;
     background: var(--container-bg);
-    border-radius: 24px;
-    padding: 30px;
+    border-radius: 5px;
+    padding: 10px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.1);
     border: 1px solid var(--border-color);
     aspect-ratio: 16/9;
@@ -150,7 +150,7 @@ body.background-transitioning .background-stage__layer--transition {
         "controls controls controls";
     grid-template-rows: auto auto 1fr 80px;
     grid-template-columns: 300px 1fr 1fr;
-    gap: 20px;
+    gap: 10px;
     transition: background 0.5s, box-shadow 0.5s;
     overflow: visible;
     position: relative;
@@ -188,8 +188,8 @@ body.background-transitioning .background-stage__layer--transition {
 .search-area {
     grid-area: search;
     background: var(--component-bg);
-    border-radius: 16px;
-    padding: 20px;
+    border-radius: 5px;
+    padding: 12px;
     border: 1px solid var(--border-color);
     position: relative;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -218,7 +218,7 @@ body.background-transitioning .background-stage__layer--transition {
     display: flex;
     gap: 10px;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     flex-shrink: 0;
 }
 
@@ -647,7 +647,7 @@ body.background-transitioning .background-stage__layer--transition {
 .cover-area {
     grid-area: cover;
     background: var(--component-bg);
-    border-radius: 16px;
+    border-radius: 5px;
     padding: 20px;
     border: 1px solid var(--border-color);
     display: flex;
@@ -726,8 +726,8 @@ body.background-transitioning .background-stage__layer--transition {
 /* 播放列表和歌词区域 */
 .playlist, .lyrics {
     background: var(--component-bg);
-    border-radius: 16px;
-    padding: 20px;
+    border-radius: 5px;
+    padding: 10px;
     border: 1px solid var(--border-color);
     height: 100%;
     min-width: 0;
