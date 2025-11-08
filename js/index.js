@@ -820,9 +820,22 @@ const state = {
 
             // 可选：切换播放状态（大部分系统自己会处理）
             navigator.mediaSession.setActionHandler('play', async () => {
-                try { await audio.play(); } catch(_) {}
+                try {
+                    await audio.play();
+                    debugLog(`isMobileView: ${isMobileView}`);
+                    if (isMobileView) {
+                        releaseWakeLock();
+                        await requestWakeLock();
+                    }
+                } catch (_) { }
             });
-            navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+            navigator.mediaSession.setActionHandler('pause', () => {
+                audio.pause();
+                debugLog(`isMobileView: ${isMobileView}`);
+                if (isMobileView) {
+                    releaseWakeLock();
+                }
+            });
         } catch (_) {
             // 某些平台不支持全部动作
         }
@@ -836,18 +849,14 @@ const state = {
         bindActionHandlersOnce();
     });
 
-    audio.addEventListener('play', async () => {
+    audio.addEventListener('play', () => {
         navigator.mediaSession.playbackState = 'playing';
-        debugLog(`play - isMobileView: ${isMobileView}`);
-        if (isMobileView) { releaseWakeLock(); await requestWakeLock(); }
         updatePositionState();
         lastPositionUpdateTime = Date.now();
     });
 
     audio.addEventListener('pause', () => {
-        debugLog(`pause - isMobileView: ${isMobileView}`);
         navigator.mediaSession.playbackState = 'paused';
-        if (isMobileView) { releaseWakeLock(); }
         updatePositionState();
         lastPositionUpdateTime = Date.now();
     });
