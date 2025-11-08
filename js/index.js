@@ -838,12 +838,14 @@ const state = {
 
     audio.addEventListener('play', async () => {
         navigator.mediaSession.playbackState = 'playing';
+        debugLog(`play - isMobileView: ${isMobileView}`);
         if (isMobileView) { releaseWakeLock(); await requestWakeLock(); }
         updatePositionState();
         lastPositionUpdateTime = Date.now();
     });
 
     audio.addEventListener('pause', () => {
+        debugLog(`pause - isMobileView: ${isMobileView}`);
         navigator.mediaSession.playbackState = 'paused';
         if (isMobileView) { releaseWakeLock(); }
         updatePositionState();
@@ -920,9 +922,9 @@ let wakeLock = null;
 async function requestWakeLock() {
   try {
     wakeLock = await navigator.wakeLock.request('screen');
-    console.log('Wake Lock 已获得');
+    debugLog('Wake Lock 已获得');
   } catch (e) {
-    console.error('获取 Wake Lock 失败:', e);
+    debugLog('获取 Wake Lock 失败!');
   }
 }
 
@@ -930,7 +932,7 @@ function releaseWakeLock() {
   if (wakeLock !== null) {
     wakeLock.release().then(() => {
       wakeLock = null;
-      console.log('Wake Lock 已释放');
+      debugLog('Wake Lock 已释放');
     });
   }
 }
