@@ -822,19 +822,10 @@ const state = {
             navigator.mediaSession.setActionHandler('play', async () => {
                 try {
                     await audio.play();
-                    debugLog(`isMobileView: ${isMobileView}`);
-                    if (isMobileView) {
-                        releaseWakeLock();
-                        await requestWakeLock();
-                    }
                 } catch (_) { }
             });
             navigator.mediaSession.setActionHandler('pause', () => {
                 audio.pause();
-                debugLog(`isMobileView: ${isMobileView}`);
-                if (isMobileView) {
-                    releaseWakeLock();
-                }
             });
         } catch (_) {
             // 某些平台不支持全部动作
@@ -1720,8 +1711,18 @@ async function togglePlayPause() {
                 showNotification("播放失败，请检查网络连接", "error");
             });
         }
+        
+        debugLog(`播放 - 是否是手机: ${isMobileView}`);
+        if (isMobileView) {
+            releaseWakeLock();
+            await requestWakeLock();
+        }
     } else {
         dom.audioPlayer.pause();
+        debugLog(`暂停 - 是否是手机: ${isMobileView}`);
+        if (isMobileView) {
+            releaseWakeLock();
+        }
     }
 }
 
