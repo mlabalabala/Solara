@@ -836,14 +836,16 @@ const state = {
         bindActionHandlersOnce();
     });
 
-    audio.addEventListener('play', () => {
+    audio.addEventListener('play', async () => {
         navigator.mediaSession.playbackState = 'playing';
+        if (isMobileView) { releaseWakeLock(); await requestWakeLock(); }
         updatePositionState();
         lastPositionUpdateTime = Date.now();
     });
 
     audio.addEventListener('pause', () => {
         navigator.mediaSession.playbackState = 'paused';
+        if (isMobileView) { releaseWakeLock(); }
         updatePositionState();
         lastPositionUpdateTime = Date.now();
     });
@@ -913,6 +915,25 @@ let sourceMenuPositionFrame = null;
 let qualityMenuPositionFrame = null;
 let floatingMenuListenersAttached = false;
 let qualityMenuAnchor = null;
+let wakeLock = null;
+
+async function requestWakeLock() {
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    console.log('Wake Lock 已获得');
+  } catch (e) {
+    console.error('获取 Wake Lock 失败:', e);
+  }
+}
+
+function releaseWakeLock() {
+  if (wakeLock !== null) {
+    wakeLock.release().then(() => {
+      wakeLock = null;
+      console.log('Wake Lock 已释放');
+    });
+  }
+}
 
 function runWithoutTransition(element, callback) {
     if (!element || typeof callback !== "function") return;
